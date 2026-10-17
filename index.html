@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tech Week 2026 · Desafíos de brecha digital</title>
+<style>
+:root{--bg:#080a0d;--panel:#10141a;--line:#232a33;--ink:#f2f5f7;--mute:#9aa5b1;--acc:#35e0c0;--acc-ink:#04110e;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080a0d;--panel:#10141a;--line:#232a33;--ink:#f2f5f7;--mute:#9aa5b1;--acc:#35e0c0;--acc-ink:#04110e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#080a0d;--panel:#10141a;--line:#232a33;--ink:#f2f5f7;--mute:#9aa5b1;--acc:#35e0c0;--acc-ink:#04110e}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;letter-spacing:.04em}.logo b{color:var(--acc)}
+.tag{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.hero{padding:64px 0 48px}
+.kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h1{font-size:clamp(40px,9vw,88px);line-height:1;margin:16px 0 20px;letter-spacing:-.03em}
+h1 span+span{color:var(--acc)}
+.lead{font-size:clamp(17px,2.4vw,22px);color:var(--mute);max-width:640px;margin:0 0 26px}
+.btn{display:inline-block;background:var(--acc);color:var(--acc-ink);font-weight:700;padding:13px 22px;border-radius:999px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:8px}
+section{padding:44px 0;border-top:1px solid var(--line)}
+.sec{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);font-weight:700;margin:0 0 10px}
+h2{font-size:clamp(26px,4.6vw,40px);line-height:1.1;margin:0 0 18px;letter-spacing:-.02em}
+h3{font-size:18px;margin:0 0 8px}
+p{margin:0 0 12px}.mute{color:var(--mute)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card .n{color:var(--acc);font-weight:800;font-size:13px;letter-spacing:.14em}
+.callout{border-left:3px solid var(--acc);padding:4px 0 4px 16px;font-size:18px;font-weight:600;margin:18px 0}
+.steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));counter-reset:s}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.step .num{font-size:34px;font-weight:800;color:var(--acc);line-height:1}
+.step .when{font-weight:700;margin:10px 0 6px}
+.step p{font-size:14px;color:var(--mute);margin:0}
+.step.hl{border-color:var(--acc)}
+.price{display:inline-block;margin:4px 0 12px;color:var(--acc);font-weight:700;font-size:14px}
+.lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700;margin:12px 0 2px}
+ul{padding-left:20px;margin:0}li{margin:0 0 8px;color:var(--mute)}
+.contact{background:var(--acc);color:var(--acc-ink);border-radius:20px;padding:28px}
+.contact h3{font-size:20px}.contact p{margin:0 0 8px}
+.contact a{color:var(--acc-ink);font-weight:800}
+#ed-ui{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:calc(100% - 28px)}
+#ed-ui[hidden]{display:none}
+#ed-ui .pill,#ed-ui button{font-weight:600;font-size:13px;font-family:inherit;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:11px 16px;cursor:pointer}
+#ed-ui button.pri{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+#ed-ui .box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#ed-ui input{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:14px;font-family:inherit;min-width:0;width:170px}
+#ed-ui .msg{font-size:12px;color:var(--mute);flex-basis:100%}
+.editing [contenteditable]{outline:1px dashed var(--acc);outline-offset:3px;border-radius:3px}
+footer{padding:28px 0 36px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo">BRECHA<b>DI.</b></div><div class="tag">Tech Week 2026</div></header>
+<main>
+
+<div class="hero">
+  <div class="kicker">Tech Week 2026 · Brecha DI</div>
+  <h1><span>Desafíos de</span> <span>brecha digital.</span></h1>
+  <p class="lead">Conectando problemas reales de empresas con talento tecnológico y multidisciplinario.</p>
+  <a class="btn" href="#contacto">Conversemos</a><a class="btn ghost" href="#proceso">Cómo funciona ↓</a>
+</div>
+
+<section>
+  <p class="sec">01 / ¿Qué es?</p>
+  <h2>Innovación abierta, con proceso.</h2>
+  <p class="mute">Una iniciativa de innovación abierta en el marco de la Tech Week 2026 (semana del 16 de noviembre), diseñada para conectar necesidades concretas de empresas con equipos de desarrollo, universidades, startups y profesionales.</p>
+  <div class="callout">No es un hackathon de 24 horas.</div>
+  <p class="mute">Es un proceso de trabajo previo durante octubre y noviembre, donde equipos seleccionados diseñan y avanzan en soluciones tangibles, culminando en una sesión de 4 horas durante Tech Week con presentaciones, jurados, vinculación directa y networking.</p>
+</section>
+
+<section>
+  <p class="sec">02 / ¿Por qué participar?</p>
+  <h2>Toda organización tiene una brecha.</h2>
+  <p class="mute">Las brechas digitales limitan el crecimiento o el vínculo con el entorno. Participar permite:</p>
+  <div class="grid g3">
+    <div class="card"><div class="n">A</div><h3>Resolver problemas reales</h3><p class="mute">Sin comprometer la capacidad operativa de tu equipo interno.</p></div>
+    <div class="card"><div class="n">B</div><h3>Explorar talento en acción</h3><p class="mute">Talento validado: posibles contrataciones, prácticas o proyectos.</p></div>
+    <div class="card"><div class="n">C</div><h3>Visibilidad de marca</h3><p class="mute">Posicionamiento como referente de innovación abierta y vinculación con la comunidad tecnológica.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="sec">03 / Desafíos</p>
+  <h2>¿Qué desafíos puede aportar tu empresa?</h2>
+  <p class="mute">Buscamos problemáticas concretas en dos líneas de trabajo.</p>
+  <div class="grid g2">
+    <div class="card"><div class="n">LÍNEA 1</div><h3>Brecha digital interna</h3><p class="mute">Adopción de herramientas, flujos de comunicación interna, gestión/visualización de datos, automatización de procesos, capacitación técnica de colaboradores.</p></div>
+    <div class="card"><div class="n">LÍNEA 2</div><h3>Brecha digital externa</h3><p class="mute">Experiencia digital de clientes/usuarios, accesibilidad web/móvil, canales de atención, comunicación y acceso a información para comunidades o beneficiarios.</p></div>
+  </div>
+</section>
+
+<section id="proceso">
+  <p class="sec">04 / Proceso</p>
+  <h2>¿Cómo funciona?</h2>
+  <div class="steps">
+    <div class="step"><div class="num">01</div><div class="when">Octubre</div><p>Levantamiento del desafío y definición del alcance con Alpha.</p></div>
+    <div class="step"><div class="num">02</div><div class="when">7–20 oct</div><p>Convocatoria abierta y asignación de equipos especializados.</p></div>
+    <div class="step"><div class="num">03</div><div class="when">20 oct – 15 nov</div><p>Desarrollo, acompañamiento metodológico y seguimiento de avances.</p></div>
+    <div class="step hl"><div class="num">04</div><div class="when">Semana 16 nov</div><p>Demo Day Tech Week: propuestas frente a jurados y directivos.</p></div>
+    <div class="step"><div class="num">05</div><div class="when">Continuidad</div><p>Oportunidad de avanzar a pilotos, mentorías o acuerdos de colaboración.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="sec">05 / Vinculación</p>
+  <h2>Opciones de vinculación y sponsorship.</h2>
+  <div class="grid g3">
+    <div class="card"><h3>Empresa Desafío</h3>
+      <div class="lbl">Qué aporta</div><p class="mute">Planteamiento del problema + disponibilidad para 2 sesiones de feedback.</p>
+      <div class="lbl">Qué recibe</div><p class="mute">Propuestas de solución concretas de hasta 2 equipos asignados + visibilidad en Tech Week.</p></div>
+    <div class="card"><h3>Sponsor Principal</h3><div class="price">Desde $1.500.000 o equivalente</div>
+      <div class="lbl">Qué aporta</div><p class="mute">Aporte económico o habilitador clave (tecnología, espacio, premios o difusión).</p>
+      <div class="lbl">Qué recibe</div><p class="mute">Espacio protagónico de marca, rol en el jurado, apertura de desafío exclusivo y acceso preferente a perfiles.</p></div>
+    <div class="card"><h3>Partner Ecosistema / Especie</h3>
+      <div class="lbl">Qué aporta</div><p class="mute">Infraestructura, licencias cloud/software/IA, catering o servicios de preproducción.</p>
+      <div class="lbl">Qué recibe</div><p class="mute">Presencia de marca en piezas de difusión, networking y mención oficial en Tech Week.</p></div>
+  </div>
+</section>
+
+<section id="contacto">
+  <p class="sec">06 / ¿Qué necesitamos de ti hoy?</p>
+  <h2>Solo una reunión de 20 minutos.</h2>
+  <div class="grid g2">
+    <div><ul>
+      <li>Conocer brevemente la operación de tu empresa.</li>
+      <li>Identificar 1 o 2 dolores que podamos transformar en un desafío viable.</li>
+      <li>Definir la modalidad de participación que mejor se ajuste a tus objetivos.</li></ul></div>
+    <div class="contact">
+      <h3>Contacto e inicio</h3>
+      <p><b>Coordinación:</b> <span>Maria Mai | Mauro Rojas | Cristian Brown</span></p>
+      <p><span>Equipo Alpha — Tech Week 2026</span></p>
+      <p><b>Lanzamiento de convocatoria:</b> <span>miércoles 7 de octubre</span></p>
+      <p><b>Agenda directa:</b> <a data-wa href="https://wa.me/56945429495">+56 9 4542 9495</a> · <span>Mauro Rojas</span></p>
+    </div>
+  </div>
+</section>
+
+<footer><span>BRECHA DI · Una iniciativa de Alpha Docere</span><span>Colaboración, experimentación y aprendizaje</span></footer>
+</main>
+</div>
+<div id="ed-ui" hidden></div>
+<script>
+(function(){
+var PW="",els=[],orig=[],saved={},editing=false,db=null,ui=document.getElementById("ed-ui");
+document.querySelectorAll("main h2,main h3,main p,main li,main b,main span,main div,main a:not(.btn)").forEach(function(e){
+ if(e.children.length===0&&e.textContent.trim()&&!e.classList.contains("num")){els.push(e);orig.push(e.textContent);}
+});
+function wa(){document.querySelectorAll("a[data-wa]").forEach(function(a){var d=a.textContent.replace(/\D/g,"");if(d)a.href="https://wa.me/"+d;});}
+function apply(){els.forEach(function(e,i){var v=saved["t"+i];e.textContent=(typeof v==="string")?v:orig[i];});wa();}
+function api(b){return fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(function(r){return{ok:r.ok,status:r.status};}).catch(function(){return{ok:false,status:0};});}
+function mk(t,c,f){var b=document.createElement("button");b.textContent=t;if(c)b.className=c;b.onclick=f;return b;}
+function show(nodes){ui.innerHTML="";nodes.forEach(function(n){ui.appendChild(n);});}
+function home(){editing=false;document.body.classList.remove("editing");els.forEach(function(e){e.removeAttribute("contenteditable");});
+ show([mk("✎ Editar textos","",ask)]);}
+function ask(){
+ var box=document.createElement("div");box.className="box";
+ var i=document.createElement("input");i.type="password";i.placeholder="Contraseña";i.autocomplete="off";
+ var m=document.createElement("div");m.className="msg";
+ function go(){m.textContent="Verificando…";var p=i.value.trim();api({password:p,check:true}).then(function(r){if(r.ok){PW=p;startEdit();}else{m.textContent=r.status===401?"Contraseña incorrecta.":"No se pudo verificar.";}});}
+ i.addEventListener("keydown",function(ev){if(ev.key==="Enter")go();});
+ box.appendChild(i);box.appendChild(mk("Entrar","pri",go));box.appendChild(mk("Cancelar","",home));box.appendChild(m);
+ show([box]);i.focus();
+}
+function startEdit(){
+ editing=true;document.body.classList.add("editing");
+ els.forEach(function(e){e.setAttribute("contenteditable","plaintext-only");if(e.contentEditable!=="plaintext-only")e.setAttribute("contenteditable","true");});
+ var box=document.createElement("div");box.className="box";
+ var m=document.createElement("div");m.className="msg";m.textContent="Edita cualquier texto y presiona Guardar.";
+ box.appendChild(mk("Guardar","pri",function(){save(m);}));
+ box.appendChild(mk("Restablecer original","",function(){if(!confirm("¿Volver a los textos originales?"))return;saved={};write(m,true);}));
+ box.appendChild(mk("Salir","",function(){apply();home();}));box.appendChild(m);show([box]);
+}
+function write(m,reset){
+ m.textContent="Guardando…";
+ api({password:PW,texts:saved}).then(function(r){if(r.ok){m.textContent="Guardado.";if(reset){apply();}}else{m.textContent="No se pudo guardar.";}});
+}
+function save(m){
+ var out={};els.forEach(function(e,i){var t=e.textContent.replace(/\s+/g," ").trim();if(t&&t!==orig[i])out["t"+i]=t;});
+ saved=out;write(m,false);
+}
+document.addEventListener("keydown",function(ev){if(editing&&ev.key==="Enter"&&ev.target.isContentEditable)ev.preventDefault();});
+document.addEventListener("click",function(ev){if(editing){var a=ev.target.closest&&ev.target.closest("a");if(a)ev.preventDefault();}});
+document.addEventListener("paste",function(ev){if(editing&&ev.target.isContentEditable){ev.preventDefault();var t=(ev.clipboardData.getData("text/plain")||"").replace(/\s+/g," ");document.execCommand("insertText",false,t);}});
+fetch("/api/content",{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(x){saved=(x&&x.texts)||{};ui.hidden=false;apply();home();}).catch(function(){});
+})();
+</script>
+</body>
+</html>
