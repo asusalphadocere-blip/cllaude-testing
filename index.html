@@ -165,7 +165,7 @@ function ask(){
  var box=document.createElement("div");box.className="box";
  var i=document.createElement("input");i.type="password";i.placeholder="Contraseña";i.autocomplete="off";
  var m=document.createElement("div");m.className="msg";
- function go(){m.textContent="Verificando…";var p=i.value.trim();api({password:p,check:true}).then(function(r){if(r.ok){PW=p;startEdit();}else{m.textContent=r.status===401?"Contraseña incorrecta.":"No se pudo verificar.";}});}
+ function go(){m.textContent="Verificando…";var p=i.value.trim();api({password:p,check:true}).then(function(r){if(r.ok){PW=p;startEdit();}else{m.textContent=r.status===401?"Contraseña incorrecta.":r.status===503?"La edición no está configurada en este despliegue.":"No se pudo verificar.";}});}
  i.addEventListener("keydown",function(ev){if(ev.key==="Enter")go();});
  box.appendChild(i);box.appendChild(mk("Entrar","pri",go));box.appendChild(mk("Cancelar","",home));box.appendChild(m);
  show([box]);i.focus();
@@ -181,7 +181,7 @@ function startEdit(){
 }
 function write(m,reset){
  m.textContent="Guardando…";
- api({password:PW,texts:saved}).then(function(r){if(r.ok){m.textContent="Guardado.";if(reset){apply();}}else{m.textContent="No se pudo guardar.";}});
+ api({password:PW,texts:saved}).then(function(r){if(r.ok){m.textContent="Guardado.";if(reset){apply();}}else{m.textContent=r.status===503?"La edición no está configurada en este despliegue.":"No se pudo guardar.";}});
 }
 function save(m){
  var out={};els.forEach(function(e,i){var t=e.textContent.replace(/\s+/g," ").trim();if(t&&t!==orig[i])out["t"+i]=t;});
